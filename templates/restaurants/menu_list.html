@@ -1,0 +1,30 @@
+<h2 class="text-xl font-bold mb-4">Menu Anda</h2>
+
+<a href="{% url 'restaurant:menu_add' %}" class="btn btn-primary mb-3">+ Tambah Menu</a>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Nama</th>
+        <th>Harga</th>
+        <th>Status</th>
+        <th>Aksi</th>
+    </tr>
+
+    {% for m in menus %}
+    <tr>
+        <td>{{ m.name }}</td>
+        <td>{{ m.price }}</td>
+        <td>
+            {% if m.is_available %}
+                <span class="text-success">Tersedia</span>
+            {% else %}
+                <span class="text-danger">Habis</span>
+            {% endif %}
+        </td>
+        <td>
+            <a href="{% url 'restaurant:menu_edit' m.id %}" class="btn btn-warning btn-sm">Edit</a>
+            <a href="{% url 'restaurant:menu_delete' m.id %}" class="btn btn-danger btn-sm">Hapus</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
